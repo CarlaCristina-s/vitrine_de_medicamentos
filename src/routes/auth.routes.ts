@@ -31,7 +31,7 @@ authRouter.post("/", async (req, res) => {
     const valido = await bcrypt.compare(userBody.senha, user.senha);
 
     if(!valido) {
-      res.status(200).json("12345");
+      res.status(200).json({userId: user.id});
       return;
     } else {
       res.status(401).json("Usuário e/ou senha incorreta.");	
