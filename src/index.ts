@@ -6,12 +6,20 @@ import userRouter from "./routes/user.routes"
 import authRouter from "./routes/auth.routes"
 import medicamentosRouter from "./routes/medicamentos.routes"
 
+import dotenv from "dotenv"
+dotenv.config()
+
+import authenticate from "./middleware/authenticate"
+
+import {Role} from "./entity/Role"
+import {Permission} from "./entity/Permission"
+
 const app = express()
 
 app.use(cors())
 app.use(express.json())
 
-app.use("/users", userRouter)
+app.use("/users", authenticate, userRouter)
 app.use("/login", authRouter)
 app.use("/medicamentos", medicamentosRouter)
 
